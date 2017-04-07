@@ -16,8 +16,21 @@ class Category(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = _("Раздел")
-        verbose_name_plural = _("Раздел")
+        verbose_name = _("Разделы")
+        verbose_name_plural = _("Разделы")
         ordering = ['title', ]
 
 
+class Item(models.Model):
+    title = models.CharField(_("Название объекта"), max_length=1000, default='')
+    num = models.IntegerField(_("Порядковый номер"), default=0, blank=True, db_index=True)
+    categories = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True)
+    content = RichTextField("Описание", blank=True)
+
+    class Meta:
+        verbose_name = _("Объект")
+        verbose_name_plural = _("Объекты")
+        ordering = ['num', 'title', ]
+
+    def __str__(self):
+        return self.title
