@@ -55,10 +55,16 @@ CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
         'height': '500',
-        'width': '100%',
-        'extraPlugins': 'youtube'
+        'width': '100%'
     },
 }
+
+
+
+
+
+
+
 
 
 
@@ -77,7 +83,7 @@ ROOT_URLCONF = 'titov_base.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'titov_base', 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -140,4 +146,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+
+
+
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

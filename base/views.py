@@ -1,3 +1,12 @@
-from django.shortcuts import render
+from django.conf.urls import url
 
-# Create your views here.
+from django.views import generic
+
+from .models import Category, Item
+
+
+from . import views
+
+
+class ListViewBase(generic.ListView):
+    model= Item
