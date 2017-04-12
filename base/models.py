@@ -42,9 +42,12 @@ class Reg(models.Model):
 
 class Item(models.Model):
     title = models.CharField(_("Название объекта"), max_length=1000, default='')
+    file = ImageField(_("Логотип или фоновое изображение"), upload_to='gallery', blank=True)
+
     num = models.IntegerField(_("Порядковый номер"), default=0, blank=True, db_index=True)
     categories = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True)
     regions = models.ForeignKey(Reg, on_delete=models.CASCADE, blank=True, null=True)
+
 
     fio = models.CharField(_("Контактное лицо"), max_length=1000, default='')
     phone = models.CharField(_("Телефон"), max_length=12, default='')
@@ -61,20 +64,7 @@ class Item(models.Model):
     means = models.CharField(_("Средства производства"), max_length=2000, default='')
     licenses = models.CharField(_("Лицензии и сертификаты"), max_length=1000, default='')
     realty = models.IntegerField(_("Недвижимость"), choices=REALTY_CHOICES, default=0)
-
-
-
-
-
-
-
-
     content = RichTextField("Описание", blank=True)
-
-
-
-
-
 
 
     class Meta:
@@ -84,6 +74,8 @@ class Item(models.Model):
 
     def __str__(self):
         return self.title
+
+
 
 class ItemPhoto(models.Model):
     file = ImageField(_("Изображение"), upload_to='gallery', blank=True)

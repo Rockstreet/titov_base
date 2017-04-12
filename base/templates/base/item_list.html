@@ -1,1 +1,45 @@
 {% extends "base.html" %}
+{% load thumbnail %}
+
+
+
+{% block content %}
+
+
+
+
+  <div class="row">
+        <div class="col-lg-12">
+          <h2>Предложения</h2>
+      </div>
+            </div>
+
+
+
+
+<div class="row">
+{% for item_obj in object_list %}
+    {% thumbnail item_obj.file "205x115" crop="center" as im %}
+
+
+
+        <div class="col-lg-4">
+          <img src="{{ im.url }}" class="img-responsive"  alt="{{ item_obj.title }}">
+           <h3>{{item_obj.title}}</h3>
+            <h4>{{item_obj.purchase}} руб. </h4>
+            <h6>Категория: {{item_obj.categories}}</h6>
+            <h6>Выручка: {{item_obj.receipts}} руб. </h6>
+            <h6>Прибыль: {{item_obj.profit}} руб. </h6>
+<a class="btn btn-md btn-success" href="{% url 'base:base_item' item_obj.pk %}" role="button">Подробнее</a>
+
+        </div>
+
+{% endthumbnail %}
+{% endfor %}
+
+</div>
+
+
+
+
+{% endblock content %}

@@ -158,3 +158,7 @@ STATICFILES_DIRS = (
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+THUMBNAIL_DEBUG = True
+THUMBNAIL_FORCE_OVERWRITE = True

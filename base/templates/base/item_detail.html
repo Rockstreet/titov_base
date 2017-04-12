@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% load embed_video_tags %}
+
+
+
+{% block content %}
+
+
+
+
+  <div class="row">
+        <div class="col-lg-12">
+    {% thumbnail object.file "205x115" crop="center" as im %}
+    <img src="{{ im.url }}" class="img-responsive"  alt="{{ object.title }}">
+    {% endthumbnail %}
+          <h2>{{object.title}}</h2>
+      </div>
+            </div>
+
+
+
+
+<div class="row">
+
+        <div class="col-lg-4">
+
+           <h3>Информация</h3>
+            <h6>Цена: {{object.purchase}} руб. </h6>
+            <h6>Категория: {{object.categories}}</h6>
+            <h6>Регион: {{object.regions}}</h6>
+
+        </div>
+    <div class="col-lg-4">
+           <h3>Контакты</h3>
+            <h6>{{object.fio}}</h6>
+            <h6>Телефон: {{object.phone}}</h6>
+            <h6>E-mail: {{object.email}} </h6>
+        </div>
+
+</div>
+
+<div class="row">
+
+        <div class="col-lg-4">
+
+           <h3>Показатели</h3>
+          <h6>Выручка: {{object.receipts}} руб. </h6>
+            <h6>Прибыль: {{object.profit}} руб. </h6>
+            <h6>Расходы: {{object.costs}} руб. </h6>
+            <h6>Заемные средства: {{object.borrowed}} руб. </h6>
+            <h6>Товарный остаток: {{object.balance}} руб. </h6>
+            <h6>Возраст: {{object.age}} </h6>
+            <h6>Персонал: {{object.staff}}</h6>
+
+        </div>
+    <div class="col-lg-4">
+           <h3>Доп. информация</h3>
+
+        <h6>Доля: {{object.part}}</h6>
+        <h6>Недвижимость: {{object.get_realty_display}} </h6>
+        <h6>Лицензии и сертификаты: {{object.licenses}} </h6>
+        </div>
+
+</div>
+
+
+<div class="row">
+
+        <div class="col-lg-12">
+<h2>Описание</h2>
+            {{object.content | safe}}
+
+
+        </div>
+
+
+</div>
+
+<div class="row">
+
+        <div class="col-lg-12">
+<h2>Фотографии</h2>
+
+             {% for photo_obj in object.itemphoto_set.all %}
+
+            {% if photo_obj.youtube_url %}
+            {% video photo_obj.youtube_url as my_video %}
+
+
+                                <a href="#"><img src="{% thumbnail my_video.thumbnail "205x115" crop="center" %}"></a>
+
+
+
+
+
+            {% endvideo %}
+
+            {% else %}
+
+
+            {% thumbnail photo_obj.file "205x115" crop="center" as im %}
+            <a href="#"><img src="{{im.url}}"></a>
+
+            {% endthumbnail %}
+
+            {% endif %}
+
+             {% endfor %}
+
+
+
+
+
+        </div>
+
+
+</div>
+
+
+
+
+
+{% endblock content %}
